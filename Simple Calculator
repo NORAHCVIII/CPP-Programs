@@ -1,0 +1,68 @@
+#include <iostream>
+//Simple calculator
+int main() {
+	using namespace std;
+	float a, b, c;
+	char operation;
+	bool inopertation = true;
+	cout << "WELCOME TO SIMPLE CALCULATOR\ncalculator can only operate on two numbers\n" << endl;
+	cout << "Choose operation +  -  /  *  % \n>| ";
+	cin >> operation;
+  //Infinite loop while in calculator
+	while (inopertation == true){
+		if (operation == '+'){
+			cout << "Enter number\n> ";
+			cin >> a;
+			cout << "Enter number\n> ";
+			cin >> b;
+			cout << "Result : " << a + b << "\n" << endl;
+			inopertation = false;
+		}
+		else if (operation == '-'){
+			cout << "Enter number\n> ";
+			cin >> a;
+			cout << "Enter number\n> ";
+			cin >> b;
+			cout << "Result : " << a - b << "\n" << endl;
+			inopertation = false;
+		}
+		else if (operation == '/'){
+			cout << "Enter number\n> ";
+			cin >> a;
+			cout << "Enter number\n> ";
+			cin >> b;
+			//Division problem
+			if (b != 0){
+				cout << "Result : " << a / b << "\n" << endl;
+			}
+			else{
+				cout << "Are you stupid or what?"<< "\n"<<endl;
+			}
+			inopertation = false;
+		}
+		else if (operation == '*'){
+			cout << "Enter number\n> ";
+			cin >> a;
+			cout << "Enter number\n> ";
+			cin >> b;
+			cout << "Result : " << a * b << "\n" << endl;
+			inopertation = false;
+		}
+		else if (operation == '%'){
+			cout << "Enter number\n> ";
+			cin >> a;
+			cout << "Enter number\n> ";
+			cin >> b;
+			cout << "Result : " << int(a) % int(b) << "\n" << endl;
+			inopertation = false;
+		}
+		else{
+			cout << "Strange operation" << "\n" << endl;;
+			inopertation = false;
+		}
+		cout << "Choose operation +  -  /  *  %'\n>| ";
+		cin >> operation;
+		inopertation = true;
+	}
+
+}
