@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+//1, 3, 5, 7, 9
+int main()
+{
+    setlocale(LC_ALL, "RUS");
+    int i, j, N, M, a[20][20];
+    int sum = 0;
+    bool State = true;
+    int res = 0;
+    cout << "N="; //ввод количества строк
+    cin >> N;
+    cout << "M="; //ввод количества столбцов
+    cin >> M;
+    cout << "Input matrix A \n";
+    //цикл по переменной i, в которой перебираем строки матрицы
+    for (i = 0; i < N; i++)
+        //цикл по переменной j, в котором перебираем элементы внутри строки
+        for (j = 0; j < M; j++)
+            cin >> a[i][j]; //ввод очередного элемента матрицы
+    cout << "matrix A \n";
+    for (i = 0; i < N; i++){
+        for (j = 0; j < M; j++)
+                cout << a[i][j] << "\t"; //вывод очередного элемента матрицы
+            cout << endl; //переход на новую строку после вывода всех элементов строки
+    }
+    //Проверка количество нечетных
+    for (i = 0; i < N; i++){
+        for (j = 0; j < M; j++)
+            //Проверка чисел над главной диагональю
+            if (i < j && a[i][j] % 2 == 1)res++;
+    }
+    //Если не все числа над главной диагональю нечетные то и сообщение не выведеться
+    for (i = 0; i < N; i++) {
+        for (j = 0; j < M; j++)
+            if (i < j && a[i][j] % 2 != 0 && res >= (N + M) / 2) State = false , cout << "Above the main diagonal odd is = " << a[i][j] << endl;
+            else if (i == j)sum += a[i][j];
+    }
+    cout <<"\nSum of main diagonal = " << sum <<"\nNumber of odd = " << res <<endl;
+    //Новая матрица,перебивка умноженная на сумму диагонали
+    if (State == false) {
+        for (i = 0; i < N; i++) {
+            for (j = 0; j < M; j++)
+                cout << a[i][j] * sum << "\t"; //вывод очередного элемента матрицы
+            cout << endl; //переход на новую строку после вывода всех элементов строки
+        }
+    }
+
+
+    system("pause");
+    return 0;
+}
