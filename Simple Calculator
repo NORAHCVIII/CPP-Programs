@@ -6,9 +6,9 @@ int main() {
 	char operation;
 	bool inopertation = true;
 	cout << "WELCOME TO SIMPLE CALCULATOR\ncalculator can only operate on two numbers\n" << endl;
-	cout << "Choose operation +  -  /  *  % \n>| ";
+	cout << "Choose operation +  -  /  *  %\n_______________________________\n>| ";
 	cin >> operation;
-  //Infinite loop while in calculator
+	//Loop while in operation
 	while (inopertation == true){
 		if (operation == '+'){
 			cout << "Enter number\n> ";
@@ -60,7 +60,7 @@ int main() {
 			cout << "Strange operation" << "\n" << endl;;
 			inopertation = false;
 		}
-		cout << "Choose operation +  -  /  *  %'\n>| ";
+		cout << "Choose operation +  -  /  *  %'\n_______________________________\n>| ";
 		cin >> operation;
 		inopertation = true;
 	}
