@@ -1,0 +1,117 @@
+// FileManager.cpp : Simple command prompt programm to execute files
+//Be carefull, programm works with ISO C++ 17 or higher
+
+//Including necessary libraies
+#include <iostream>
+#include <filesystem>
+#include <fstream>
+
+
+
+int main()
+{	//Using namespace in main function with filesystem including
+	using namespace std;
+	namespace fs = std::filesystem;
+	
+	//Creating current path / directory
+	fs::path CurrentPath = fs::current_path();
+
+	//While not Exit looping this function
+	while (1)
+	{	
+
+		//Output current path
+		cout << "\nCurrent path: " << CurrentPath << endl;
+		cout << "Contents:\n";
+		//Using STL filesystem to iterate content of a directory
+		for (const auto& entry : fs::directory_iterator(CurrentPath)){
+
+			cout << "         " << entry.path().filename().string() << endl;
+		}
+
+		//Put cmd commands here,if you need to add more
+		cout << "Enter a command (cd,ls,cat,cp,mv,rm,exit):";
+		string command;
+		cin >> command;
+
+		if (command == "cd") {
+
+			cout << "Enter a directory: ";
+			string dir;
+			cin >> dir;
+			if (fs::is_directory(dir)){
+
+				CurrentPath = dir;
+
+			}
+			else{
+				cout << "Error: not a directory\n";
+			}
+		}
+
+		else if (command == "ls") {
+			//Nothing will happen
+		}
+		//If not a regular file we not able to open it
+		else if (command == "cat") {
+			
+			cout << "Enter a file: ";
+			string file;
+			cin >> file;
+			
+			if (fs::is_regular_file(file)) {
+				
+				ifstream ifs(file);
+				cout << ifs.rdbuf();
+
+			}
+			else{
+
+				cout << "Error: not a regular file\n";
+			}
+		}
+		//Moving files to another directory
+		else if (command == "mv") {
+
+			cout << "Enter a source file: ";
+			string src;
+			cin >> src;
+			cout << "Enter a destination file: ";
+			string dst;
+			cin >> dst;
+			try {
+				fs::rename(src, dst);
+				cout << "File moved successfully\n";
+
+			}
+			catch (fs::filesystem_error& e) {
+				cout << "Error moving files: "<<e.what()<<endl;
+			}
+
+		}
+		//Removing file
+		else if (command == "rm") {
+			cout << "Enter a file: ";
+			string file;
+			cin >> file;
+			try
+			{
+				fs::remove(file);
+			}
+			catch (fs::filesystem_error& e)
+			{
+				cout << "Error removing file: " << e.what() << endl;
+			}
+		}
+
+		else if(command == "exit") {
+			break;
+		}
+
+		else
+		{
+		cout << "Unknow command\n";
+		}
+
+	}
+}
